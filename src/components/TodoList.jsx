@@ -1,6 +1,7 @@
 import {useContext} from "react";
 import {TodoContext} from "../contexts/TodoContext";
 import {DeleteOutlined} from '@ant-design/icons';
+import AddList from './AddList';
 import './TodoList.css';
 
 const TodoList = () => {
@@ -29,6 +30,7 @@ const TodoList = () => {
                     </div>
                 ))
             }
+            <AddList />
         </div>
     );
 }
