@@ -1,6 +1,6 @@
 import {useContext} from "react";
 import {TodoContext} from "../contexts/TodoContext";
-import {DeleteOutlined} from '@ant-design/icons';
+import {DeleteOutlined, InfoCircleOutlined} from '@ant-design/icons';
 import AddList from './AddList';
 import './TodoList.css';
 
@@ -17,7 +17,7 @@ const TodoList = () => {
     }
 
     return (
-        <div className={"to-do-list"}>This is the TodoList Component.
+        <div className={"to-do-list"}><h1>This is Your TodoList</h1>
             {
                 state.length > 0 ? (
                     state.map(({id,done,text}) => (
@@ -31,7 +31,10 @@ const TodoList = () => {
                         </div>
                     ))
                 ) : (
-                    <div className="todo-empty">Add the things you need to do today</div>
+                    <div className="todo-empty">
+                        <InfoCircleOutlined style={{fontSize: 22, color: '#faad14'}} />
+                        <h3>Add the things you need to do today</h3>
+                    </div>
                 )
             }
             <AddList />

@@ -1,6 +1,7 @@
 import React, {useContext, useState} from 'react';
 import {Button, Input} from "antd";
 import {TodoContext} from "../contexts/TodoContext";
+import './AddList.css'
 
 const AddList = () => {
     const {dispatch} = useContext(TodoContext)
@@ -13,8 +14,8 @@ const AddList = () => {
     }
     return <div className="add-list-row">
         <Input
-            style={{ width: 600 }}
-            placeholder="Basic usage"
+            style={{ width: 300 }}
+            placeholder="Please add your todo"
             value={value}
             onChange={e => setValue(e.target.value)}
         />

@@ -1,6 +1,5 @@
 .to-do-list {
     display: block;
-    margin-bottom: 10px;
 }
 .todo-row {
     display: flex;
@@ -9,15 +8,31 @@
     margin-bottom: 10px;
     gap: 10px;
 }
-.to-do{
-    border: solid black 2px;
+
+.to-do {
+    border: solid black 1px;
+    font-size: 18px;
     display: flex;
     align-items: center;
     width: 200px;
 }
+
+.to-do:hover {
+    border: solid deepskyblue 1px;
+}
+
+.todo-empty {
+    display: flex;
+    justify-content: center;
+    margin-bottom: 10px;
+    color: #faad14;
+    gap: 8px;
+}
+
 .done {
     text-decoration: line-through;
 }
+
 .delete-button:hover {
     color: coral;
 }

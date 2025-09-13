@@ -1,11 +1,10 @@
-/* 让输入框和按钮在一行 */
 .add-list-row {
     display: flex;
+    justify-content: center;
     align-items: center;
 }
-
-/* 可选：让输入框和按钮之间有间距 */
 .add-list-row .ant-input {
     margin-right: 12px;
 }
+
 
