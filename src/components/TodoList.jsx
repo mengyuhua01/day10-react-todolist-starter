@@ -19,16 +19,20 @@ const TodoList = () => {
     return (
         <div className={"to-do-list"}>This is the TodoList Component.
             {
-                state.map(({id,done,text}) => (
-                    <div className="todo-row" key={id}>
-                        <div className={`to-do ${done ? 'done' : ''}`} onClick={() => {toggleDone(id)}}>
-                            {text}
+                state.length > 0 ? (
+                    state.map(({id,done,text}) => (
+                        <div className="todo-row" key={id}>
+                            <div className={`to-do ${done ? 'done' : ''}`} onClick={() => {toggleDone(id)}}>
+                                {text}
+                            </div>
+                            <DeleteOutlined className={"delete-button"} onClick={()=>{
+                                removeTodo(id)
+                            }}/>
                         </div>
-                        <DeleteOutlined className={"delete-button"} onClick={()=>{
-                            removeTodo(id)
-                        }}/>
-                    </div>
-                ))
+                    ))
+                ) : (
+                    <div className="todo-empty">Add the things you need to do today</div>
+                )
             }
             <AddList />
         </div>
