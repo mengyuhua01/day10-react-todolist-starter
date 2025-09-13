@@ -1,14 +1,23 @@
 .to-do-list {
     display: block;
-    border: solid black 2px;
-    text-align: center;
+    margin-bottom: 10px;
 }
-
+.todo-row {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 10px;
+    gap: 10px;
+}
 .to-do{
     border: solid black 2px;
+    display: flex;
+    align-items: center;
     width: 200px;
-    margin: 10px auto 10px auto;
 }
 .done {
     text-decoration: line-through;
+}
+.delete-button:hover {
+    color: coral;
 }

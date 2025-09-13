@@ -13,6 +13,8 @@ export const todoReducer = (state, action) => {
               }
               return todo
           })
+      case 'REMOVE':
+          return state.filter(todo => action.id !== todo.id)
       default: return state
   }
 };
