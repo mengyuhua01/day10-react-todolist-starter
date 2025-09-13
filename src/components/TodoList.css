@@ -1,4 +1,14 @@
+.to-do-list {
+    display: block;
+    border: solid black 2px;
+    text-align: center;
+}
+
 .to-do{
     border: solid black 2px;
     width: 200px;
+    margin: 10px auto 10px auto;
+}
+.done {
+    text-decoration: line-through;
 }
