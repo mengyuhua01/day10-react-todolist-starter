@@ -2,9 +2,14 @@
     display: flex;
     justify-content: center;
     align-items: center;
+    width: 100%;
+    gap: 10px;
+    margin-top: 10px;
 }
+
 .add-list-row .ant-input {
-    margin-right: 12px;
+    margin-left: 22px;
+    height: 40px;
 }
 
 

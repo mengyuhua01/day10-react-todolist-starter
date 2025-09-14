@@ -14,12 +14,11 @@ const AddList = () => {
     }
     return <div className="add-list-row">
         <Input
-            style={{ width: 300 }}
             placeholder="Please add your todo"
             value={value}
             onChange={e => setValue(e.target.value)}
         />
-        <Button type="primary" onClick={addTodo} style={{ marginLeft: 12 }}>add</Button>
+        <Button type="primary" onClick={addTodo}>add</Button>
     </div>
 }
 export default AddList
