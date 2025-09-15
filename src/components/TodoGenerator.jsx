@@ -1,9 +1,9 @@
 import React, {useContext, useState} from 'react';
 import {Button, Input} from "antd";
 import {TodoContext} from "../contexts/TodoContext";
-import './AddList.css'
+import './TodoGenerator.css'
 
-const AddList = () => {
+const TodoGenerator = () => {
     const {dispatch} = useContext(TodoContext)
     const [value, setValue] = useState('');
     function addTodo() {
@@ -21,4 +21,4 @@ const AddList = () => {
         <Button type="primary" onClick={addTodo}>add</Button>
     </div>
 }
-export default AddList
+export default TodoGenerator

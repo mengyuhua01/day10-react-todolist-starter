@@ -1,7 +1,7 @@
 import {useContext} from "react";
 import {TodoContext} from "../contexts/TodoContext";
 import {DeleteOutlined, InfoCircleOutlined} from '@ant-design/icons';
-import AddList from './AddList';
+import TodoGenerator from './TodoGenerator';
 import './TodoList.css';
 
 const TodoList = () => {
@@ -37,7 +37,7 @@ const TodoList = () => {
                     </div>
                 )
             }
-            <AddList />
+            <TodoGenerator />
         </div>
     );
 }
