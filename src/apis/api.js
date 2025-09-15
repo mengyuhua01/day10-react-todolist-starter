@@ -8,3 +8,5 @@ export const getTodos = async () => await instance.get('/todos')
 export const addTodos = async (todo) => await instance.post('/todos',todo)
 
 export const deleteTodos = async (id) => await instance.delete(`/todos/${id}`)
+
+export const updateTodos = async (id,todo) => await instance.put(`/todos/${id}`,todo)

@@ -3,28 +3,8 @@ import './App.css';
 import TodoList from "./components/TodoList";
 import {initialState, todoReducer} from "./reducers/todoReducer";
 import {TodoContext} from "./contexts/TodoContext";
-import {createBrowserRouter, NavLink, Outlet, RouterProvider, useParams} from "react-router";
-
-function DefaultLayout() {
-    return <>
-        <header>
-            <nav>
-                <ul>
-                    <li><NavLink to={"/"}>Home</NavLink></li>
-                    <li><NavLink to={"/todo"}>Todo List</NavLink></li>
-                    <li><NavLink to={"/about"}>About</NavLink></li>
-                </ul>
-            </nav>
-        </header>
-        <main>
-            <h1>XXXX</h1>
-            <Outlet></Outlet>
-        </main>
-        <footer>
-            footer copyright
-        </footer>
-    </>
-}
+import {createBrowserRouter, RouterProvider, useParams} from "react-router";
+import {DefaultLayout} from "./components/DefaultLayout";
 
 function TodoDetails() {
     const {key} = useParams()

@@ -3,13 +3,16 @@ import {TodoContext} from "../contexts/TodoContext";
 import {DeleteOutlined, InfoCircleOutlined} from '@ant-design/icons';
 import TodoGenerator from './TodoGenerator';
 import './TodoList.css';
-import {getTodos,deleteTodos} from '../apis/api'
+import {getTodos,deleteTodos,updateTodos} from '../apis/api'
 
 const TodoList = () => {
     const {state, dispatch} = useContext(TodoContext)
 
-    function toggleDone(id) {
+    async function toggleDone(id) {
         const action = {type: "DONE", id: id}
+        const todo = state.find(todo => todo.id === id)
+        const newTodo = {...todo, done: !todo.done}
+        await updateTodos(id,newTodo)
         dispatch(action)
     }
 
