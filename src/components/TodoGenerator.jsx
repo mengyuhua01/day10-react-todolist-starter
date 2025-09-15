@@ -2,7 +2,7 @@ import React, {useContext, useState} from 'react';
 import {Button, Input} from "antd";
 import {TodoContext} from "../contexts/TodoContext";
 import './TodoGenerator.css'
-import {addTodos, getTodos} from '../apis/api'
+import {addTodos} from '../apis/api'
 
 const TodoGenerator = () => {
     const {dispatch} = useContext(TodoContext)

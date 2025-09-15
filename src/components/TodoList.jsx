@@ -1,6 +1,6 @@
 import {useContext, useEffect, useState} from "react";
 import {TodoContext} from "../contexts/TodoContext";
-import { Button, Modal } from 'antd';
+import { Modal } from 'antd';
 import {DeleteOutlined, InfoCircleOutlined,EditOutlined} from '@ant-design/icons';
 import TodoGenerator from './TodoGenerator';
 import './TodoList.css';
