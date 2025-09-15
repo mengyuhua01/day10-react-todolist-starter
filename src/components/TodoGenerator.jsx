@@ -1,19 +1,14 @@
-import React, {useContext, useState} from 'react';
+import React, {useState} from 'react';
 import {Button, Input} from "antd";
-import {TodoContext} from "../contexts/TodoContext";
 import './TodoGenerator.css'
-import {addTodos} from '../apis/api'
 
-const TodoGenerator = () => {
-    const {dispatch} = useContext(TodoContext)
+const TodoGenerator = ({ addTodo }) => {
     const [value, setValue] = useState('');
 
-    async function addTodo() {
+    async function addInputValue() {
         if (value.trim()) {
             const todo = {text: value.trim(), done: false}
-            const {data} =  await addTodos(todo);
-            const action = {type: 'ADD', newTodo: data}
-            dispatch(action);
+            await addTodo(todo);
             setValue('');
         }
     }
@@ -24,7 +19,7 @@ const TodoGenerator = () => {
             value={value}
             onChange={e => setValue(e.target.value)}
         />
-        <Button type="primary" onClick={addTodo}>add</Button>
+        <Button type="primary" onClick={addInputValue}>add</Button>
     </div>
 }
 export default TodoGenerator

@@ -1,60 +1,42 @@
-import {useContext, useEffect, useState} from "react";
-import {TodoContext} from "../contexts/TodoContext";
-import { Modal } from 'antd';
+import {useState} from "react";
+import TodoModal from './TodoModal';
 import {DeleteOutlined, InfoCircleOutlined,EditOutlined} from '@ant-design/icons';
 import TodoGenerator from './TodoGenerator';
 import './TodoList.css';
-import {getTodos,deleteTodos,updateTodos} from '../apis/api'
-
+import { useTodoService } from '../hooks/useTodoService';
 const TodoList = () => {
-    const {state, dispatch} = useContext(TodoContext)
+    const { todos, updateTodo, removeTodo, addTodo } = useTodoService();
     const [isModalOpen, setIsModalOpen] = useState(false);
-    const showModal = () => {
-        setIsModalOpen(true);
-    };
+    const [currentTodo, setCurrentTodo] = useState(null);
     const handleOk = () => {
+        if (currentTodo) {
+            updateTodo(currentTodo.id, { text: currentTodo.text, done: currentTodo.done });
+        }
         setIsModalOpen(false);
+        setCurrentTodo(null);
     };
     const handleCancel = () => {
         setIsModalOpen(false);
     };
+    const showModal = (todo) => {
+        setCurrentTodo(todo);
+        setIsModalOpen(true);
+    };
 
-    async function toggleDone(id) {
-        const action = {type: "DONE", id: id}
-        const todo = state.find(todo => todo.id === id)
-        const newTodo = {...todo, done: !todo.done}
-        await updateTodos(id,newTodo)
-        dispatch(action)
-    }
-
-    async function removeTodo(id) {
-        try {
-            await deleteTodos(id);
-            dispatch({type: "REMOVE", id: id});
-        } catch (error) {
-            console.error("删除失败", error);
-        }
-    }
-
-    useEffect(() => {
-        getTodos().then(response => {
-            dispatch({type: 'LOAD_TODOS', todos: response.data})
-        });
-    }, []);
     return (
         <div className={"to-do-list"}><h1>This is Your TodoList</h1>
             {
-                state.length > 0 ? (
-                    state.map(({id, done, text}) => (
+                todos.length > 0 ? (
+                    todos.map(({ id, done, text }) => (
                         <div className="todo-row" key={id}>
-                            <div className={`to-do ${done ? 'done' : ''}`}>
+                            <div className={`to-do ${done ? 'done' : ''}`} onClick={() => updateTodo(id, { text, done: !done })}>
                                 {text}
                             </div>
                             <DeleteOutlined className={"delete-button"} onClick={() => {
                                 removeTodo(id)
                             }}/>
                             <EditOutlined  className={"edit-button"} onClick={() =>{
-                                showModal()
+                                showModal({ id, text, done })
                             }}/>
                         </div>
                     ))
@@ -65,16 +47,14 @@ const TodoList = () => {
                     </div>
                 )
             }
-            <TodoGenerator/>
-            <Modal
-                title="Basic Modal"
-                closable={{ 'aria-label': 'Custom Close Button' }}
+            <TodoGenerator addTodo={addTodo} />
+            <TodoModal
                 open={isModalOpen}
+                todo={currentTodo}
+                setTodo={setCurrentTodo}
                 onOk={handleOk}
                 onCancel={handleCancel}
-            >
-                <p></p>
-            </Modal>
+            />
         </div>
     );
 }
