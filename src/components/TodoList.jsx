@@ -1,12 +1,23 @@
-import {useContext, useEffect} from "react";
+import {useContext, useEffect, useState} from "react";
 import {TodoContext} from "../contexts/TodoContext";
-import {DeleteOutlined, InfoCircleOutlined} from '@ant-design/icons';
+import { Button, Modal } from 'antd';
+import {DeleteOutlined, InfoCircleOutlined,EditOutlined} from '@ant-design/icons';
 import TodoGenerator from './TodoGenerator';
 import './TodoList.css';
 import {getTodos,deleteTodos,updateTodos} from '../apis/api'
 
 const TodoList = () => {
     const {state, dispatch} = useContext(TodoContext)
+    const [isModalOpen, setIsModalOpen] = useState(false);
+    const showModal = () => {
+        setIsModalOpen(true);
+    };
+    const handleOk = () => {
+        setIsModalOpen(false);
+    };
+    const handleCancel = () => {
+        setIsModalOpen(false);
+    };
 
     async function toggleDone(id) {
         const action = {type: "DONE", id: id}
@@ -36,13 +47,14 @@ const TodoList = () => {
                 state.length > 0 ? (
                     state.map(({id, done, text}) => (
                         <div className="todo-row" key={id}>
-                            <div className={`to-do ${done ? 'done' : ''}`} onClick={() => {
-                                toggleDone(id)
-                            }}>
+                            <div className={`to-do ${done ? 'done' : ''}`}>
                                 {text}
                             </div>
                             <DeleteOutlined className={"delete-button"} onClick={() => {
                                 removeTodo(id)
+                            }}/>
+                            <EditOutlined  className={"edit-button"} onClick={() =>{
+                                showModal()
                             }}/>
                         </div>
                     ))
@@ -54,6 +66,15 @@ const TodoList = () => {
                 )
             }
             <TodoGenerator/>
+            <Modal
+                title="Basic Modal"
+                closable={{ 'aria-label': 'Custom Close Button' }}
+                open={isModalOpen}
+                onOk={handleOk}
+                onCancel={handleCancel}
+            >
+                <p></p>
+            </Modal>
         </div>
     );
 }

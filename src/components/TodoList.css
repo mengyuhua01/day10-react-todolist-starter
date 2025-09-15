@@ -58,6 +58,15 @@
     transition: color 0.3s;
 }
 
+.edit-button {
+    font-size: 18px;
+    cursor: pointer;
+    transition: color 0.3s;
+}
+
 .delete-button:hover {
     color: coral;
+}
+.edit-button:hover {
+    color: deepskyblue;
 }
