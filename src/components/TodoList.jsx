@@ -3,7 +3,7 @@ import {TodoContext} from "../contexts/TodoContext";
 import {DeleteOutlined, InfoCircleOutlined} from '@ant-design/icons';
 import TodoGenerator from './TodoGenerator';
 import './TodoList.css';
-import {getTodos} from '../apis/api'
+import {getTodos,deleteTodos} from '../apis/api'
 
 const TodoList = () => {
     const {state, dispatch} = useContext(TodoContext)
@@ -13,14 +13,17 @@ const TodoList = () => {
         dispatch(action)
     }
 
-    function removeTodo(id) {
-        const action = {type: "REMOVE", id: id}
-        dispatch(action)
+    async function removeTodo(id) {
+        try {
+            await deleteTodos(id);
+            dispatch({type: "REMOVE", id: id});
+        } catch (error) {
+            console.error("删除失败", error);
+        }
     }
 
     useEffect(() => {
         getTodos().then(response => {
-            console.log(response.data)
             dispatch({type: 'LOAD_TODOS', todos: response.data})
         });
     }, []);
