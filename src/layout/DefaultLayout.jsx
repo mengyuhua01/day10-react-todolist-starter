@@ -1,10 +1,10 @@
 import {NavLink, Outlet} from "react-router";
 import {Layout, Menu, theme } from 'antd';
-import {UnorderedListOutlined,HomeOutlined,CheckCircleOutlined} from '@ant-design/icons';
+import {UnorderedListOutlined,HomeOutlined,CheckCircleOutlined,InfoCircleOutlined} from '@ant-design/icons';
 const { Header, Content, Footer } = Layout;
 const items = [
     { label: (<NavLink to="/">Home</NavLink>), key: 'home',icon: <HomeOutlined /> },
-    { label: (<NavLink to="/about">About</NavLink>), key: 'about' },
+    { label: (<NavLink to="/about">About</NavLink>), key: 'about', icon: <InfoCircleOutlined /> },
     { label: (<NavLink to="/todo">Todo List</NavLink>), key: 'todo' ,icon: <UnorderedListOutlined />},
     { label: (<NavLink to="/completed">Completed</NavLink>), key: 'completed' ,icon: <CheckCircleOutlined />},
 ];
@@ -37,7 +37,7 @@ export function DefaultLayout() {
                 </div>
             </Content>
             <Footer style={{ textAlign: 'center' }}>
-                Ant Design ©{new Date().getFullYear()} Created by Ant UED
+                Leo Design ©{new Date().getFullYear()} Created by MENGLE
             </Footer>
         </Layout>
     );
