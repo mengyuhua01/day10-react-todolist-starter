@@ -1,6 +1,8 @@
 import {createBrowserRouter} from "react-router";
 import {DefaultLayout} from "../layout/DefaultLayout";
 import TodoList from "../components/TodoList";
+import CompletedTodos from "../components/CompletedTodos";
+import ErrorPage from "../components/ErrorPage";
 import {useParams} from "react-router";
 
 function TodoDetails() {
@@ -13,12 +15,14 @@ const routes = [
         path: '/',
         element: <DefaultLayout/>,
         children: [
-            { path: '', element: <h1>Home page</h1> },
-            { path: 'about', element: <h1>About us</h1> },
-            { path: 'todo', element: <TodoList/> },
-            { path: "todo/:key", element: <TodoDetails /> }
+            {path: '', element: <h1>Home page</h1>},
+            {path: 'about', element: <h1>About us</h1>},
+            {path: 'todo', element: <TodoList/>},
+            {path: 'completed', element: <CompletedTodos/>},
+            {path: "todo/:key", element: <TodoDetails/>}
         ]
-    }
+    },
+    {path: '*', element: <ErrorPage/>}
 ];
 
 export const router = createBrowserRouter(routes);

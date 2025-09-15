@@ -1,9 +1,7 @@
-import {useReducer} from "react";
 import './App.css';
-import TodoList from "./components/TodoList";
 import {router} from "./router/router";
-import {createBrowserRouter, RouterProvider, useParams} from "react-router";
 import {DefaultLayout} from "./layout/DefaultLayout";
+import {RouterProvider} from "react-router";
 function App() {
     
     return (
