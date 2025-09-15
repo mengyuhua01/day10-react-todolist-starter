@@ -9,7 +9,6 @@ const { Title, Text } = Typography;
 const CompletedTodos = () => {
     const { todos } = useTodoService();
 
-    // 过滤出已完成的 todos
     const completedTodos = todos.filter(todo => todo.done);
 
     return (
