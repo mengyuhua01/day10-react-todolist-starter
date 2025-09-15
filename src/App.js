@@ -11,7 +11,7 @@ function DefaultLayout() {
             <nav>
                 <ul>
                     <li><NavLink to={"/"}>Home</NavLink></li>
-                    <li><NavLink to={""}>Todo List</NavLink></li>
+                    <li><NavLink to={"/todo"}>Todo List</NavLink></li>
                     <li><NavLink to={"/about"}>About</NavLink></li>
                 </ul>
             </nav>
@@ -37,18 +37,23 @@ const routes = [
             }, {
                 path: 'about',
                 element: <h1>About us</h1>
+            },{
+                path: 'todo',
+                element: <TodoList />
             }
         ]
     }
 ]
 const router = createBrowserRouter(routes)
 function App() {
-    // the Hooks API manage component data state
     const [state, dispatch] = useReducer(todoReducer, initialState);
 
     return (
         <div className="App">
-         <RouterProvider router={router}></RouterProvider>
+            <TodoContext.Provider value={{state,dispatch}}>
+                <RouterProvider router={router}></RouterProvider>
+            </TodoContext.Provider>
+
         </div>
     );
 }
