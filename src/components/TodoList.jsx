@@ -1,8 +1,9 @@
-import {useContext} from "react";
+import {useContext, useEffect} from "react";
 import {TodoContext} from "../contexts/TodoContext";
 import {DeleteOutlined, InfoCircleOutlined} from '@ant-design/icons';
 import TodoGenerator from './TodoGenerator';
 import './TodoList.css';
+import {getTodos} from '../apis/api'
 
 const TodoList = () => {
     const {state, dispatch} = useContext(TodoContext)
@@ -11,33 +12,42 @@ const TodoList = () => {
         const action = {type: "DONE", id: id}
         dispatch(action)
     }
+
     function removeTodo(id) {
         const action = {type: "REMOVE", id: id}
         dispatch(action)
     }
 
+    useEffect(() => {
+        getTodos().then(response => {
+            console.log(response.data)
+            dispatch({type: 'LOAD_TODOS', todos: response.data})
+        });
+    }, []);
     return (
         <div className={"to-do-list"}><h1>This is Your TodoList</h1>
             {
                 state.length > 0 ? (
-                    state.map(({id,done,text}) => (
+                    state.map(({id, done, text}) => (
                         <div className="todo-row" key={id}>
-                            <div className={`to-do ${done ? 'done' : ''}`} onClick={() => {toggleDone(id)}}>
+                            <div className={`to-do ${done ? 'done' : ''}`} onClick={() => {
+                                toggleDone(id)
+                            }}>
                                 {text}
                             </div>
-                            <DeleteOutlined className={"delete-button"} onClick={()=>{
+                            <DeleteOutlined className={"delete-button"} onClick={() => {
                                 removeTodo(id)
                             }}/>
                         </div>
                     ))
                 ) : (
                     <div className="todo-empty">
-                        <InfoCircleOutlined style={{fontSize: 22, color: '#faad14'}} />
+                        <InfoCircleOutlined style={{fontSize: 22, color: '#faad14'}}/>
                         <h3>Add the things you need to do today</h3>
                     </div>
                 )
             }
-            <TodoGenerator />
+            <TodoGenerator/>
         </div>
     );
 }
