@@ -4,7 +4,7 @@ import TodoList from "./components/TodoList";
 import {initialState, todoReducer} from "./reducers/todoReducer";
 import {TodoContext} from "./contexts/TodoContext";
 import {createBrowserRouter, RouterProvider, useParams} from "react-router";
-import {DefaultLayout} from "./components/DefaultLayout";
+import {DefaultLayout} from "./layout/DefaultLayout";
 
 function TodoDetails() {
     const {key} = useParams()
@@ -40,7 +40,9 @@ function App() {
     return (
         <div className="App">
             <TodoContext.Provider value={{state, dispatch}}>
-                <RouterProvider router={router}></RouterProvider>
+                <RouterProvider router={router}>
+                    <DefaultLayout />
+                </RouterProvider>
             </TodoContext.Provider>
 
         </div>
